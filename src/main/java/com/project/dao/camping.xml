@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.dao.CampingDAO">
+
+	<insert id="insert" parameterType="vo">
+		INSERT INTO CAMPING (IDX, NAME , CONTENT, PW, CAMPNUMBER) values(camping_idx_seq.nextval, #{name}, #{content}, #{pw}, #{campNumber})
+	</insert>
+
+	<!-- 전체 글 개수 구하기 -->
+	<select id="selectCount" resultType="int">
+		select count(*) from CAMPING where campNumber = #{campNumber}
+	</select>
+
+	<!-- 1페이지 분량 글 받기 -->
+	<select id="selectList" parameterType="java.util.HashMap" resultType="vo">
+				select * from (
+					select rownum rnum, TT.* from (
+							select * from camping where campNumber = #{campNumber} order by idx desc
+						)TT
+					) where rnum between #{startNo} and #{endNo}
+	</select>
+	
+	<!-- 좋아요 증가 -->
+	<update id="up" parameterType="int">
+		update camping set up = up + 1 where idx = #{idx}
+	</update>
+
+	<!-- 싫어요 증가 -->
+	<update id="down" parameterType="int">
+		update camping set down = down + 1 where idx = #{idx}
+	</update>
+	<!-- 글 수정 -->
+	<update id="update" parameterType="vo">
+		update camping set content = #{content} where idx = #{idx}
+	</update>
+	
+	<!-- 글 1건 얻어오기 -->
+	<select id="selectByIdx" parameterType="int" resultType="vo">
+		select * from camping where idx = #{idx}
+	</select>
+	
+	<!-- 캠핑장 정보 불러오기 -->
+	<select id="selectCamp"  parameterType="int" resultType="data">
+		select * from campData where idx = #{campNumber}
+	</select>
+	
+	<!-- 댓글 한 건 지우기 -->
+	<delete id="delete" parameterType="int">
+		delete from camping where idx = #{idx}
+	</delete>
+	
+	<!--관리자 추가  -->
+	<insert id="register" parameterType="campingManagerVO">
+		INSERT INTO CAMPINGMANAGER (id, pw) values(#{id}, #{pw})
+	</insert>
+	
+	<!-- 전체 캠핑장 개수 가져오기 -->
+	<select id="seletCount" resultType="int">	
+		select count(*) from camping
+	</select>
+	
+	
+	<select id="selectDataList" resultType="String">
+		SELECT name FROM CAMPDATA ORDER BY idx asc
+	</select>
+	
+</mapper>
