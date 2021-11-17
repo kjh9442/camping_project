@@ -8,50 +8,32 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="css/bootstrap.css">
 <link rel="stylesheet" href="css/mainpage/mainpage.css">
-<link rel="stylesheet" href="css/contentview/contentview.css">
-<link rel="stylesheet" href="css/mainpage/topmenu.css">
-<link rel="stylesheet" href="css/content/navbar.css">
-<!-- 지역별 토글 지정돼 있음 지우면 안됨 -->
+<link rel="stylesheet" href="css/mainpage/topmenu.css">  <!-- 지역별 토글 지정돼 있음 자우면 안됨 -->
 <link rel="stylesheet" type="text/css" href="css/list/style.css" />
-<link rel="stylesheet" type="text/css" href="css/contentView/contentview.css" />
+<link rel="stylesheet" href="css/content/navbar.css">
 <link rel="icon" href="images/favicon/favicon.ico" type="image/x-icon">
-<script type="text/javascript" src="js/mainpage.js"></script>
+<script type="text/javascript" src="js/mainpage.mainpage.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="./js/bootstrap.js"></script>
-<!-- <script type="text/javascript" src="./js/passwordCheck.js"></script> --> <!-- javascript 추출하기 아래의 script 코드 -->
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6c77ab0a5c207368771cf75c4d79f600"></script>
 
-<script>
-	//비밀번호가 일치하는가 확인하는 함수
-	function passwordCheckFunction() {
-		var userPassword1 = ${vo.pw};
-		var userPassword2 = $('#userPassword2').val();
-		
-		/* if( ${manager} != null){
-			$("#correct").attr("disabled", true);
-			$("#delete").attr("disabled", true);
-		}else */ 
-		if (userPassword1 != userPassword2) {
-			$('#passwordCheckMessage').html('비밀번호가 일치하지 않습니다.');
-			$('#userPassword2').val('');
-			$("#correct").attr("disabled", true);
-			$("#delete").attr("disabled", true);
-		} else {
-			$('#passwordCheckMessage').html('비밀번호가 일치합니다.');
-			$("#correct").attr("disabled", false);
-			$("#delete").attr("disabled", false);
-		}
-	}
-	function submitbutton() {
-		$('#userPassword2').val('');
-		$('#passwordCheckMessage').html('');
-		$("#correct").attr("disabled", true);
-	}
-</script>
+<style type="text/css">
+.yet{
+	margin-bottom: 130px;
+}
+img{
+	width: 80%
+}
+h1{
+	margin-top: 40px;
+}
+
+</style>
 
 <title>뭐해? 나와!</title>
 </head>
 <body>
-	<nav class="navbar navbar-default">
+<nav class="navbar navbar-default">
 	<div class="container-fluid">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" 
@@ -66,6 +48,7 @@
 		
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
+				
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" 
 						data-toggle="dropdown" 
@@ -122,23 +105,23 @@
 		                </ul>	
 		              </li>	
 		              
-		              <li><a tabindex="-1" href="#">전남</a></li>		              		              		              
+		              <li><a tabindex="-1" href="list5">전남</a></li>		              		              		              
 
 		              <li class="dropdown-submenu">
-		              	<a tabindex="-1" href="#">경북</a>	
+		              	<a tabindex="-1" href="list5">경북</a>	
 		              	<ul class="dropdown-menu">
 		                  <li><a tabindex="-1" href="list?campNumber=10">스카이글램핑</a></li>
 		                </ul>	
 		              </li>		
 		              
 		              <li class="dropdown-submenu">
-		              	<a tabindex="-1" href="#">경남</a>	
+		              	<a tabindex="-1" href="list5">경남</a>	
 		              	<ul class="dropdown-menu">
 		                  <li><a tabindex="-1" href="list5">사천 비토 솔섬 오토캠핑장</a></li>  <!-- 데이터 없음 -->
 		                </ul>	
 		              </li>	
 		              
-		              <li><a tabindex="-1" href="#">제주</a></li>  <!-- 데이터 없음 -->			               	              
+		              <li><a tabindex="-1" href="list5">제주</a></li>  <!-- 데이터 없음 -->			               	              
             		</ul>
 				</li>
 				
@@ -170,105 +153,33 @@
 							<span class="caret"></span>
 					</a>
 					<ul class="dropdown-menu">
-						<c:if test="${manager==null}">
-							<li><a href="loginMain">로그인</a></li>
-						</c:if>
-						<c:if test="${manager!=null}">
-							<li><a href="register">관리자등록</a></li>
-							<li><a href="logout">로그아웃</a></li>
-						</c:if>
+							<c:if test="${manager==null}">
+								<li><a href="loginMain">로그인</a></li>
+							</c:if>
+							<c:if test="${manager!=null}">
+								<li><a href="register">관리자등록</a></li>
+								<li><a href="logout">로그아웃</a></li>
+							</c:if>
 					</ul>
+					
 				</li>
 			</div>
 			</div>
 		</div>
 </nav>
-	<!--시작-->
-	<div id="contents">
-		<div class="camp_cont_w">
-			<div class="line_100">
-				<span class="skip"></span>
-			</div>
-			<div class="layout">
-				<ul class="camp_tab05">
-					<li class="on"><a href="#" class="camp_intro">캠핑장 소개</a></li>
-					<li id="c_guide"><a href="${campDataVO.url}" class="camp_guide">예약안내</a></li>
-					<li id="c_map"><a href="list3?campNumber=${campNumber}" class="camp_map">위치/주변정보</a></li>
-					<li id="c_review"><a href="list2?campNumber=${campNumber}" class="camp_review">캠핑 여행후기</a></li>
-					<li id="c_notice"><a href="list4?campNumber=${campNumber}" class="camp_notice">캠핑장 이용수칙</a></li>
-				</ul>
-
-				<!-- 1개의 글 -->
-				<form class="updateForm" action="update" method="post">
-					<table class="up" width="1200" align="center" border="1" cellpadding="5" cellspacing="0">
-					<thead>
-						<tr>
-							<td width="200" align="center">글번호</td>
-							<td width="800" align="center">이름</td>
-							<td width="200" align="center">작성일</td>
-						</tr>
-					</thead>
-					<tbody>	
-						<tr>
-							<td align="center">${vo.idx}</td>
-							<td align="center">
-								<c:set var="name" value="${fn:replace(vo.name, '<', '&lt;')}" />
-								<c:set var="name" value="${fn:replace(name, '>', '&gt;')}" /> ${name}
-							</td>
-							<td align="center"><jsp:useBean id="date" class="java.util.Date" /> 
-								<c:if test="${date.year == vo.writeDate.year && date.month == vo.writeDate.month && date.date == vo.writeDate.date }">
-									<fmt:formatDate value="${vo.writeDate}" pattern="a h:mm" />
-								</c:if> <c:if test="${date.year != vo.writeDate.year || date.month != vo.writeDate.month || date.date != vo.writeDate.date }">
-									<fmt:formatDate value="${vo.writeDate}" pattern="yyyy.MM.dd(E)" />
-								</c:if></td>
-						</tr>
-
-						<tr>
-						<c:if test="${manager==null}">
-							<th>비밀번호 확인</th>
-							<td><input id="userPassword2" type="password" placeholder="비밀번호를 입력하세요" /></td>
-							<td align="center"><input type="button" class="btn btn-primary" onclick="passwordCheckFunction()" value="비밀번호 확인" /></td>
-						</c:if>
-						</tr>
-						<tr>
-						<c:if test="${manager==null}">
-							<td colspan="3"><h5 id="passwordCheckMessage" style="color: red;">비밀번호 일치 확인창</h5></td>
-						</c:if>
-						</tr>
-						<tr>
-							<th align="center">내용</th>
-							<td colspan="3"><textarea rows="10" name="content" style="resize: none; width: 98%;">${vo.content}</textarea></td>
-						</tr>
-						<tr>
-							<td colspan="3" align="center"><input type="hidden" name="idx" value="${vo.idx}" />
-								 <input type="hidden" name="currentPage" value="${currentPage}" />
-								 <input type="hidden" name="campNumber" value="${vo.campNumber}" />
-								 <c:if test="${manager!=null}">
-									 <input id="correct" type="submit" value="수정하기"/> 
-									 <input id="delete" type="button" value="삭제하기" onclick="location.href='delete?idx=${vo.idx}&currentPage=${currentPage}'" /> 
-								 </c:if>
-								 <c:if test="${manager==null}">
-								<input id="correct" type="submit" value="수정하기"disabled="disabled" /> 
-								<input id="delete" type="button" value="삭제하기" disabled="disabled" 
-									 	onclick="location.href='delete?idx=${vo.idx}&currentPage=${currentPage}'" /> 
-								 </c:if>
-								 <input type="button" value="돌아가기"
-									onclick="location.href='list2?campNumber=${vo.campNumber}&currentPage=${currentPage}'" />
-							</td>
-						</tr>
-						</tbody>
-					</table>
-				</form>
-				<!-- 1개의 글 -->
-
-			</div>
-		</div>
+	
+<div class="container yet">
+	<div class="contents">
+		<img alt="" src="images/notyet.jpg">
+		<h1>페이지 준비중입니다.</h1>
+		<br/>
+		<h2>죄송합니다. 현재 작업 진행중입니다. </h2>
+		<h2>조금만 더 시간을 주시면 조속히 페이지 업데이트 하겠습니다.</h2>
 	</div>
-	</div>
-	</section>
-	<!-- 끝 -->
-
-	<footer style="background-color: #000000; color: #ffffff">
+</div>	
+	
+	
+<footer style="background-color: #000000; color: #ffffff">
 		<div class="container">
 			<br/>
 			<div class="row">
@@ -301,5 +212,7 @@
 			</div>
 		</div>
 	</footer>
+
+<script src="https://kit.fontawesome.com/27afa53023.js" crossorigin="anonymous"></script>
 </body>
 </html>

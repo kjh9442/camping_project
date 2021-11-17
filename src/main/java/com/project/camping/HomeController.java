@@ -254,7 +254,10 @@ public class HomeController {
 		return "list3";
 	}
 	
-	
+	@RequestMapping("/list5")
+	public String list5(HttpServletRequest request, Model model) {
+		return "list5";
+	}
 	
 	/**
 	 * @param request
