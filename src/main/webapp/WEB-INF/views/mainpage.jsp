@@ -69,7 +69,6 @@
 		              <li class="dropdown-submenu">
 		              	<a tabindex="-1" href="#">강원</a>	
 		              	<ul class="dropdown-menu">
-		                  <li><a tabindex="-1" href="#">동강 전망휴양림 오토캠핑장</a></li> <!--자료없음  -->
 		                  <li><a tabindex="-1" href="list?campNumber=12">별마로 빌리지</a></li>
 		                  <li><a tabindex="-1" href="list?campNumber=11">소금강 오토캠프장</a></li>
 		                </ul>	
@@ -164,12 +163,9 @@
                 <img src="./images/mainphotho.jpg" style="height :720px;"> 
             </div>
 
-            <!-- End Item -->
+             <!-- End Item -->
             <div class="item">
-            <iframe width="100%" height="720px" src="https://www.youtube.com/embed/FIreJ82UKHM" 
-            title="YouTube video player" frameborder="0" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-            allowfullscreen></iframe>
+                <img src="./images/campingforest.jpg" style="height :720px;">
             </div>
             <!-- End Item -->
             <div class="item">
@@ -186,10 +182,10 @@
         </div>
         <!-- End Carousel Inner -->
         <ul class="nav nav-pills nav-justified">
-            <li class="slide" data-target="#myCarousel" data-slide-to="0" ><a href="#">뭐해? 나와!</a></li>
-            <li class="slide" data-target="#myCarousel" data-slide-to="1"><a href="#">캠핑 노하우</a></li>
-            <li class="slide" data-target="#myCarousel" data-slide-to="2"><a href="#">캠핑 필수템</a></li>
-            <li class="slide" data-target="#myCarousel" data-slide-to="3"><a href="#">뭐해? 나와!</a></li>
+            <li class="slide" data-target="#myCarousel" data-slide-to="0"><a href="#" class="slide-font">뭐</a></li>
+            <li class="slide" data-target="#myCarousel" data-slide-to="1"><a href="#" class="slide-font">해?</a></li>
+            <li class="slide" data-target="#myCarousel" data-slide-to="2"><a href="#" class="slide-font">나</a></li>
+            <li class="slide" data-target="#myCarousel" data-slide-to="3"><a href="#" class="slide-font">와!</a></li>
         </ul>
     </div>
  </div>

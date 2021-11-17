@@ -229,7 +229,6 @@ public class HomeController {
 		try {
 			campNumber = Integer.parseInt(request.getParameter("campNumber"));
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
-//			System.out.println("in");
 		} catch (Exception e) {
 		}
 		int totalCount =  dao.selectCount(campNumber);
